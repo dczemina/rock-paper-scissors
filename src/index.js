@@ -24,30 +24,37 @@ const roundResult = (message, result) => {
     }
 }
 
-const playRound = (playerChoice, computerChoice) => {
-    const playerChoiceFormatted = formatChoice(playerChoice);
-    const computerChoiceFormatted = formatChoice(computerChoice);
-    
-    if (playerChoiceFormatted === computerChoiceFormatted) {
+const playRound = (playerChoice, computerChoice) => {    
+    if (playerChoice === computerChoice) {
         return roundResult('Tie!', 0);
     }
 
-    const computerWinsMessage = `You lose! ${computerChoiceFormatted} beats ${playerChoiceFormatted}.`;
-    const playerWinsMessage = `You win! ${playerChoiceFormatted} beats ${computerChoiceFormatted}.`;
+    const computerWinsMessage = `You lose! ${computerChoice} beats ${playerChoice}.`;
+    const playerWinsMessage = `You win! ${playerChoice} beats ${computerChoice}.`;
 
-    switch(playerChoiceFormatted) {
+    switch(playerChoice) {
         case 'ROCK':
-            if (computerChoiceFormatted === 'PAPER') return roundResult(computerWinsMessage, -1);
+            if (computerChoice === 'PAPER') return roundResult(computerWinsMessage, -1);
             return roundResult(playerWinsMessage, 1);
         case 'PAPER':
-            if (computerChoiceFormatted === 'SCISSORS') return roundResult(computerWinsMessage, -1);
+            if (computerChoice === 'SCISSORS') return roundResult(computerWinsMessage, -1);
             return roundResult(playerWinsMessage, 1);
         case 'SCISSORS':
-            if (computerChoiceFormatted === 'ROCK') return roundResult(computerWinsMessage, -1);
+            if (computerChoice === 'ROCK') return roundResult(computerWinsMessage, -1);
             return roundResult(playerWinsMessage, 1);
         default:
-            throw `Invalid player choice ${playerChoiceFormatted}`;
+            throw `Invalid player choice ${playerChoice}`;
     }
+}
+
+const getPlayerChoice = () => {
+    let playerChoice = prompt('Rock, Paper, or Scissors?');
+    playerChoice = formatChoice(playerChoice);
+    if (playerChoice !== 'ROCK' && playerChoice !== 'PAPER' && playerChoice !== 'SCISSORS') {
+        console.warn(`${playerChoice} is not a valid choice. Please choose again.`)
+        return getPlayerChoice();
+    }
+    return playerChoice;
 }
 
 const game = () => {
@@ -60,8 +67,7 @@ const game = () => {
     const numRounds = 5;
 
     for (let r=1; r<=numRounds; r++) {
-        const playerChoice = prompt('Rock, Paper, or Scissors?');
-        const result = playRound(playerChoice, getComputerChoice());
+        const result = playRound(getPlayerChoice(), getComputerChoice());
 
         console.log(result.message);
         switch (result.result) {
