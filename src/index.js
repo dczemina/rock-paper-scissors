@@ -15,7 +15,10 @@ const getComputerChoice = () => {
 const playRound = (playerChoice, computerChoice) => {
     const playerChoiceFormatted = formatChoice(playerChoice);
     const computerChoiceFormatted = formatChoice(computerChoice);
-    console.log(playerChoiceFormatted, computerChoiceFormatted)
+    
+    if (playerChoiceFormatted === computerChoiceFormatted) {
+        return 'Tie';
+    }
 }
 
 const formatChoice = (choice) => {
