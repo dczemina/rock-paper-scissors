@@ -81,6 +81,11 @@ const game = () => {
                 score.computer++;
                 break;
         }
+
+        if (score.player / numRounds > 0.5 || score.computer / numRounds > 0.5) {
+            console.log('Game concluding early');
+            break;
+        }
     }
 
     if (score.player > score.computer) {
