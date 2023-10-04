@@ -49,3 +49,37 @@ const playRound = (playerChoice, computerChoice) => {
             throw `Invalid player choice ${playerChoiceFormatted}`;
     }
 }
+
+const game = () => {
+    const score = {
+        player: 0,
+        computer: 0,
+        tie: 0
+    }
+    
+    const numRounds = 5;
+
+    for (let r=1; r<=numRounds; r++) {
+        const playerChoice = prompt('Rock, Paper, or Scissors?');
+        const result = playRound(playerChoice, getComputerChoice());
+
+        console.log(result.message);
+        switch (result.result) {
+            case 0:
+                score.tie++;
+                break;
+            case 1:
+                score.player++;
+                break;
+            case -1:
+                score.computer++;
+                break;
+        }
+    }
+
+    if (score.player > score.computer) {
+        console.log(`You won! ${score.player} / ${numRounds} rounds with ${score.tie} ties`)
+    } else {
+        console.log(`You lose! Computer won ${score.computer} / ${numRounds} rounds with ${score.tie} ties`)
+    }
+}
