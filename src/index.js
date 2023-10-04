@@ -8,7 +8,19 @@ const getComputerChoice = () => {
         case 2:
             return 'PAPER'
         case 3:
-            return 'SCISSOR'
+            return 'SCISSORS'
+    }
+}
+
+const formatChoice = (choice) => {
+    const regex = /[^A-Z]+/g;
+    return choice.toUpperCase().trim().replace(regex, '');
+}
+
+const roundResult = (message, result) => {
+    return {
+        message: message,
+        result: result
     }
 }
 
@@ -17,7 +29,7 @@ const playRound = (playerChoice, computerChoice) => {
     const computerChoiceFormatted = formatChoice(computerChoice);
     
     if (playerChoiceFormatted === computerChoiceFormatted) {
-        return 'Tie!';
+        return roundResult('Tie!', 0);
     }
 
     const computerWinsMessage = `You lose! ${computerChoiceFormatted} beats ${playerChoiceFormatted}.`;
@@ -25,20 +37,15 @@ const playRound = (playerChoice, computerChoice) => {
 
     switch(playerChoiceFormatted) {
         case 'ROCK':
-            if (computerChoiceFormatted === 'PAPER') return computerWinsMessage;
-            return playerWinsMessage;
+            if (computerChoiceFormatted === 'PAPER') return roundResult(computerWinsMessage, -1);
+            return roundResult(playerWinsMessage, 1);
         case 'PAPER':
-            if (computerChoiceFormatted === 'SCISSOR') return computerWinsMessage;
-            return playerWinsMessage;
-        case 'SCISSOR':
-            if (computerChoiceFormatted === 'ROCK') return computerWinsMessage;
-            return playerWinsMessage;
+            if (computerChoiceFormatted === 'SCISSORS') return roundResult(computerWinsMessage, -1);
+            return roundResult(playerWinsMessage, 1);
+        case 'SCISSORS':
+            if (computerChoiceFormatted === 'ROCK') return roundResult(computerWinsMessage, -1);
+            return roundResult(playerWinsMessage, 1);
         default:
             throw `Invalid player choice ${playerChoiceFormatted}`;
     }
-}
-
-const formatChoice = (choice) => {
-    const regex = /[^A-Z]+/g;
-    return choice.toUpperCase().trim().replace(regex, '');
 }
