@@ -17,7 +17,24 @@ const playRound = (playerChoice, computerChoice) => {
     const computerChoiceFormatted = formatChoice(computerChoice);
     
     if (playerChoiceFormatted === computerChoiceFormatted) {
-        return 'Tie';
+        return 'Tie!';
+    }
+
+    const computerWinsMessage = `You lose! ${computerChoiceFormatted} beats ${playerChoiceFormatted}.`;
+    const playerWinsMessage = `You win! ${playerChoiceFormatted} beats ${computerChoiceFormatted}.`;
+
+    switch(playerChoiceFormatted) {
+        case 'ROCK':
+            if (computerChoiceFormatted === 'PAPER') return computerWinsMessage;
+            return playerWinsMessage;
+        case 'PAPER':
+            if (computerChoiceFormatted === 'SCISSOR') return computerWinsMessage;
+            return playerWinsMessage;
+        case 'SCISSOR':
+            if (computerChoiceFormatted === 'ROCK') return computerWinsMessage;
+            return playerWinsMessage;
+        default:
+            throw `Invalid player choice ${playerChoiceFormatted}`;
     }
 }
 
