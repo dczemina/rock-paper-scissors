@@ -112,8 +112,21 @@ const resultsText = document.querySelector('#results-text');
 
 /* Menu */
 btnStart.addEventListener('click', (event) => {
-    menuSection.classList.add('hidden');
-    gameSection.classList.remove('hidden');
+    // Start fading out menu
+    menuSection.classList.toggle('hide');
+    menuSection.classList.toggle('show');
+
+    setTimeout(() => {
+        // Swap visibility of menu and game sections
+        menuSection.classList.toggle('remove');
+        gameSection.classList.toggle('remove');
+
+        setTimeout(() => {
+            // Start fading in game
+            gameSection.classList.toggle('hide');
+            gameSection.classList.toggle('show');
+        }, 500)
+    }, 500)
 })
 
 /* Game */
