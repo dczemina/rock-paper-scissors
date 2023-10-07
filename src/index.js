@@ -1,7 +1,3 @@
-const btnRock = document.querySelector('#btn-rock');
-const btnPaper = document.querySelector('#btn-paper');
-const btnScissors = document.querySelector('#btn-scissors');
-
 const getComputerChoice = () => {
     const min = 1;
     const max = 3;
@@ -99,18 +95,20 @@ const game = () => {
     }
 }
 
-btnRock.addEventListener('click', (event) => {
-    console.log('ROCK');
+/* UI Element References */
+const btnRock = document.querySelector('#btn-rock');
+const btnPaper = document.querySelector('#btn-paper');
+const btnScissors = document.querySelector('#btn-scissors');
 
-    console.log(playRound('ROCK', getComputerChoice()));
+const resultsText = document.querySelector('#results-text');
+
+/* User Input */
+btnRock.addEventListener('click', (event) => {
+    resultsText.textContent = playRound('ROCK', getComputerChoice()).message;
 })
 btnPaper.addEventListener('click', (event) => {
-    console.log('PAPER');
-
-    console.log(playRound('PAPER', getComputerChoice()));
+    resultsText.textContent = playRound('PAPER', getComputerChoice()).message;
 })
 btnScissors.addEventListener('click', (event) => {
-    console.log('SCISSORS');
-
-    console.log(playRound('SCISSORS', getComputerChoice()));
+    resultsText.textContent = playRound('SCISSORS', getComputerChoice()).message;
 })
