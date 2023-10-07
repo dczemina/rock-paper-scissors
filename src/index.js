@@ -1,3 +1,5 @@
+let gameState = -1;
+
 const getComputerChoice = () => {
     const min = 1;
     const max = 3;
@@ -95,6 +97,14 @@ const game = () => {
     }
 }
 
+const displayMessage = (message) => {
+    resultsText.textContent = message;
+}
+
+const gameNotYetStarted = () => {
+    displayMessage('The game has not yet begun!');
+}
+
 /* UI Element References */
 
 /* Menu */
@@ -125,17 +135,32 @@ btnStart.addEventListener('click', (event) => {
             // Start fading in game
             gameSection.classList.toggle('hide');
             gameSection.classList.toggle('show');
+
+            // The game has begun
+            gameState = 1;
         }, 500)
     }, 500)
 })
 
 /* Game */
 btnRock.addEventListener('click', (event) => {
-    resultsText.textContent = playRound('ROCK', getComputerChoice()).message;
+    if (gameState !== 1) {
+        gameNotYetStarted();
+    } else {
+        displayMessage(playRound('ROCK', getComputerChoice()).message);
+    }
 })
 btnPaper.addEventListener('click', (event) => {
-    resultsText.textContent = playRound('PAPER', getComputerChoice()).message;
+    if (gameState !== 1) {
+        gameNotYetStarted();
+    } else {
+        displayMessage(playRound('PAPER', getComputerChoice()).message);
+    }
 })
 btnScissors.addEventListener('click', (event) => {
-    resultsText.textContent = playRound('SCISSORS', getComputerChoice()).message;
+    if (gameState !== 1) {
+        gameNotYetStarted();
+    } else {
+        displayMessage(playRound('SCISSORS', getComputerChoice()).message);
+    }
 })
