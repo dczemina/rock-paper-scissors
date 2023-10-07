@@ -96,13 +96,27 @@ const game = () => {
 }
 
 /* UI Element References */
+
+/* Menu */
+const menuSection = document.querySelector('#menu-section');
+const btnStart = document.querySelector('#btn-start');
+
+/* Game */
+const gameSection = document.querySelector('#game-section');
 const btnRock = document.querySelector('#btn-rock');
 const btnPaper = document.querySelector('#btn-paper');
 const btnScissors = document.querySelector('#btn-scissors');
-
 const resultsText = document.querySelector('#results-text');
 
 /* User Input */
+
+/* Menu */
+btnStart.addEventListener('click', (event) => {
+    menuSection.classList.add('hidden');
+    gameSection.classList.remove('hidden');
+})
+
+/* Game */
 btnRock.addEventListener('click', (event) => {
     resultsText.textContent = playRound('ROCK', getComputerChoice()).message;
 })
