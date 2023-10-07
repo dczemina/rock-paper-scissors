@@ -2,6 +2,16 @@ const btnRock = document.querySelector('#btn-rock');
 const btnPaper = document.querySelector('#btn-paper');
 const btnScissors = document.querySelector('#btn-scissors');
 
+btnRock.addEventListener('click', (event) => {
+    console.log('Rock');
+})
+btnPaper.addEventListener('click', (event) => {
+    console.log('Paper');
+})
+btnScissors.addEventListener('click', (event) => {
+    console.log('Scissors');
+})
+
 const getComputerChoice = () => {
     const min = 1;
     const max = 3;
