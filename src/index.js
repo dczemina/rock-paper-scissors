@@ -2,16 +2,6 @@ const btnRock = document.querySelector('#btn-rock');
 const btnPaper = document.querySelector('#btn-paper');
 const btnScissors = document.querySelector('#btn-scissors');
 
-btnRock.addEventListener('click', (event) => {
-    console.log('Rock');
-})
-btnPaper.addEventListener('click', (event) => {
-    console.log('Paper');
-})
-btnScissors.addEventListener('click', (event) => {
-    console.log('Scissors');
-})
-
 const getComputerChoice = () => {
     const min = 1;
     const max = 3;
@@ -108,3 +98,19 @@ const game = () => {
         console.log(`You lose! Computer won ${score.computer} / ${numRounds} rounds with ${score.tie} ties`)
     }
 }
+
+btnRock.addEventListener('click', (event) => {
+    console.log('ROCK');
+
+    console.log(playRound('ROCK', getComputerChoice()));
+})
+btnPaper.addEventListener('click', (event) => {
+    console.log('PAPER');
+
+    console.log(playRound('PAPER', getComputerChoice()));
+})
+btnScissors.addEventListener('click', (event) => {
+    console.log('SCISSORS');
+
+    console.log(playRound('SCISSORS', getComputerChoice()));
+})
