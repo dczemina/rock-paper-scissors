@@ -8,25 +8,27 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Shantell+Sans:wght@300;400&display=swap" rel="stylesheet">    
+    <script src="utility.js"></script>
     <script src="index.js" defer></script>
 </head>
 <body>
     <main>
         <!-- Menu -->
-        <section id="menu-section" class="show">
+        <section id="menu-section">
             <div id="menu" class="flex">
-                <button id="btn-start" class="btn-weapon shake">START</button>
+                <button id="btn-start" class="btn-weapon">START</button>
             </div>
         </section>
         <!-- Game -->
-        <section id="game-section" class="hide remove">
+        <section id="game-section" class="translucent remove">
             <div id="weapons" class="flex">
                 <button id="btn-rock" class="btn-weapon">ROCK</button>
                 <button id="btn-paper" class="btn-weapon">PAPER</button>
                 <button id="btn-scissors" class="btn-weapon">SCISSORS</button>
             </div>
+            <!-- Results -->
             <div id="results" class="flex">
-                <p id="results-text"></p>
+                <ul id="results-list"></ul>
             </div>
         </section>
     </main>

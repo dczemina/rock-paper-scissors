@@ -98,7 +98,14 @@ const game = () => {
 }
 
 const displayMessage = (message) => {
-    resultsText.textContent = message;
+    // Create <li> element with text inside <p> element
+    const resultListItem = document.createElement('li');
+    const resultListItemText = document.createElement('p');
+    resultListItemText.textContent = message;
+    resultListItem.appendChild(resultListItemText);
+    resultsList.appendChild(resultListItem);
+
+    removeAfterDelay(resultListItem, 1500);
 }
 
 const gameNotYetStarted = () => {
@@ -116,51 +123,54 @@ const gameSection = document.querySelector('#game-section');
 const btnRock = document.querySelector('#btn-rock');
 const btnPaper = document.querySelector('#btn-paper');
 const btnScissors = document.querySelector('#btn-scissors');
-const resultsText = document.querySelector('#results-text');
+const resultsList = document.querySelector('#results-list');
+
+/* All Buttons */
+const buttonList = document.querySelectorAll('.btn-weapon');
+
+buttonList.forEach(button => {
+    button.addEventListener('click', (event) => {
+        event.target.classList.add('shake');
+        removeClassAfterDelay(event.target, 'shake', 500);
+    })
+})
 
 /* User Input */
 
 /* Menu */
 btnStart.addEventListener('click', (event) => {
-    // Start fading out menu
-    menuSection.classList.toggle('hide');
-    menuSection.classList.toggle('show');
-
+    showAfterDelay(gameSection,500);
+    hideAfterDelay(menuSection,500);
     setTimeout(() => {
-        // Swap visibility of menu and game sections
-        menuSection.classList.toggle('remove');
-        gameSection.classList.toggle('remove');
-
-        setTimeout(() => {
-            // Start fading in game
-            gameSection.classList.toggle('hide');
-            gameSection.classList.toggle('show');
-
-            // The game has begun
-            gameState = 1;
-        }, 500)
+        gameState = 1;
     }, 500)
 })
 
 /* Game */
 btnRock.addEventListener('click', (event) => {
-    if (gameState !== 1) {
-        gameNotYetStarted();
-    } else {
-        displayMessage(playRound('ROCK', getComputerChoice()).message);
-    }
+    setTimeout(() => {
+        if (gameState !== 1) {
+            gameNotYetStarted();
+        } else {
+            displayMessage(playRound('ROCK', getComputerChoice()).message);
+        }
+    }, 250)
 })
 btnPaper.addEventListener('click', (event) => {
-    if (gameState !== 1) {
-        gameNotYetStarted();
-    } else {
-        displayMessage(playRound('PAPER', getComputerChoice()).message);
-    }
+    setTimeout(() => {
+        if (gameState !== 1) {
+            gameNotYetStarted();
+        } else {
+            displayMessage(playRound('PAPER', getComputerChoice()).message);
+        }
+    }, 250)
 })
 btnScissors.addEventListener('click', (event) => {
-    if (gameState !== 1) {
-        gameNotYetStarted();
-    } else {
-        displayMessage(playRound('SCISSORS', getComputerChoice()).message);
-    }
+    setTimeout(() => {
+        if (gameState !== 1) {
+            gameNotYetStarted();
+        } else {
+            displayMessage(playRound('SCISSORS', getComputerChoice()).message);
+        }
+    }, 250)
 })
