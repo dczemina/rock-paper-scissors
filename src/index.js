@@ -1,4 +1,18 @@
-let gameState = -1;
+
+
+let gameState;
+
+const resetGameState = () => {
+    gameState = {
+        started: false,
+        finished: false,
+        score: {
+            player: 0,
+            computer: 0,
+            tie: 0
+        }
+    } 
+}
 
 const getComputerChoice = () => {
     const min = 1;
@@ -97,6 +111,11 @@ const game = () => {
     }
 }
 
+const handleRoundResult = (result) => {
+    displayMessage(result.message);
+    updateScore(result.result)
+}
+
 const displayMessage = (message) => {
     // Create <li> element with text inside <p> element
     const resultListItem = document.createElement('li');
@@ -106,6 +125,24 @@ const displayMessage = (message) => {
     resultsList.appendChild(resultListItem);
 
     removeAfterDelay(resultListItem, 1500);
+}
+
+const updateScore = (adjust) => {
+    if (adjust === 0) {
+        gameState.score.tie++;
+    } else if (adjust === 1) {
+        gameState.score.player++;
+    } else if (adjust === -1) {
+        gameState.score.computer++;
+    }
+
+    if (gameState.score.player === 5) {
+        gameState.playerWins = true;
+        gameState.finished = true;
+    } else if (gameState.score.computer === 5) {
+        gameState.playerWins = false;
+        gameState.finished = true;
+    }
 }
 
 const gameNotYetStarted = () => {
@@ -142,35 +179,36 @@ btnStart.addEventListener('click', (event) => {
     showAfterDelay(gameSection,500);
     hideAfterDelay(menuSection,500);
     setTimeout(() => {
-        gameState = 1;
+        resetGameState();
+        gameState.started = true;
     }, 500)
 })
 
 /* Game */
 btnRock.addEventListener('click', (event) => {
     setTimeout(() => {
-        if (gameState !== 1) {
+        if (!gameState.started) {
             gameNotYetStarted();
         } else {
-            displayMessage(playRound('ROCK', getComputerChoice()).message);
+            handleRoundResult(playRound('ROCK', getComputerChoice()));
         }
     }, 250)
 })
 btnPaper.addEventListener('click', (event) => {
     setTimeout(() => {
-        if (gameState !== 1) {
+        if (!gameState.started) {
             gameNotYetStarted();
         } else {
-            displayMessage(playRound('PAPER', getComputerChoice()).message);
+            handleRoundResult(playRound('PAPER', getComputerChoice()));
         }
     }, 250)
 })
 btnScissors.addEventListener('click', (event) => {
     setTimeout(() => {
-        if (gameState !== 1) {
+        if (!gameState.started) {
             gameNotYetStarted();
         } else {
-            displayMessage(playRound('SCISSORS', getComputerChoice()).message);
+            handleRoundResult(playRound('SCISSORS', getComputerChoice()));
         }
     }, 250)
 })
