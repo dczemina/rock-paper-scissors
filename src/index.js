@@ -124,10 +124,14 @@ const displayMessage = (message) => {
     resultListItem.appendChild(resultListItemText);
     resultsList.appendChild(resultListItem);
 
-    removeAfterDelay(resultListItem, 1500);
+    // removeAfterDelay(resultListItem, 1500);
 }
 
 const updateScore = (adjust) => {
+    const playerScore = document.querySelector('#player-score');
+    const computerScore = document.querySelector('#computer-score');
+    const tieScore = document.querySelector('#tie-score');
+
     if (adjust === 0) {
         gameState.score.tie++;
     } else if (adjust === 1) {
@@ -135,18 +139,50 @@ const updateScore = (adjust) => {
     } else if (adjust === -1) {
         gameState.score.computer++;
     }
+    computerScore.textContent = `Computer: ${gameState.score.computer}`;
+    playerScore.textContent = `Player: ${gameState.score.player}`;
+    tieScore.textContent = `Tie: ${gameState.score.tie}`;
 
     if (gameState.score.player === 5) {
-        gameState.playerWins = true;
-        gameState.finished = true;
+        finishGame(true);
     } else if (gameState.score.computer === 5) {
-        gameState.playerWins = false;
-        gameState.finished = true;
+        finishGame(false);
+    } else {
+        btnRock.disabled = false;
+        btnPaper.disabled = false;
+        btnScissors.disabled = false;
+    }
+}
+
+const finishGame = (playerWins) => {
+    gameState.playerWins = playerWins;
+    gameState.finished = true;
+    btnRock.disabled = true;
+    btnPaper.disabled = true;
+    btnScissors.disabled = true;
+
+    const btnReturn = document.querySelector('#btn-return')
+    showAfterDelay(btnReturn, 500);
+    btnReturn.addEventListener('click', (event) => {
+        resetGameState();
+        hideAfterDelay(gameSection,500);
+        showAfterDelay(menuSection,500);
+    })
+
+    const victor = document.querySelector('#victor');
+    if (playerWins) {
+        victor.textContent = 'You are victorious';
+    } else {
+        victor.textContent = 'You have been bested.';
     }
 }
 
 const gameNotYetStarted = () => {
     displayMessage('The game has not yet begun!');
+}
+
+const gameFinished = () => {
+    displayMessage('The game is already over!');
 }
 
 /* UI Element References */
@@ -186,27 +222,36 @@ btnStart.addEventListener('click', (event) => {
 
 /* Game */
 btnRock.addEventListener('click', (event) => {
+    btnRock.disabled = true;
     setTimeout(() => {
         if (!gameState.started) {
             gameNotYetStarted();
+        } else if (gameState.finished) {
+            gameFinished();
         } else {
             handleRoundResult(playRound('ROCK', getComputerChoice()));
         }
     }, 250)
 })
 btnPaper.addEventListener('click', (event) => {
+    btnPaper.disabled = true;
     setTimeout(() => {
         if (!gameState.started) {
             gameNotYetStarted();
+        } else if (gameState.finished) {
+            gameFinished();
         } else {
             handleRoundResult(playRound('PAPER', getComputerChoice()));
         }
     }, 250)
 })
 btnScissors.addEventListener('click', (event) => {
+    btnScissors.disabled = true;
     setTimeout(() => {
         if (!gameState.started) {
             gameNotYetStarted();
+        } else if (gameState.finished) {
+            gameFinished();
         } else {
             handleRoundResult(playRound('SCISSORS', getComputerChoice()));
         }

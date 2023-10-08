@@ -12,6 +12,7 @@
     <script src="index.js" defer></script>
 </head>
 <body>
+    <h1 class="text-center">ROCK - PAPER - SCISSORS</h1>
     <main>
         <!-- Menu -->
         <section id="menu-section">
@@ -21,14 +22,22 @@
         </section>
         <!-- Game -->
         <section id="game-section" class="translucent remove">
-            <div id="weapons" class="flex">
-                <button id="btn-rock" class="btn-weapon">ROCK</button>
-                <button id="btn-paper" class="btn-weapon">PAPER</button>
-                <button id="btn-scissors" class="btn-weapon">SCISSORS</button>
-            </div>
-            <!-- Results -->
-            <div id="results" class="flex">
+            <div id="results" class="flex flex-column">
+                <!-- Selections -->
+                <div id="weapons" class="flex">
+                    <button id="btn-rock" class="btn-weapon">ROCK</button>
+                    <button id="btn-paper" class="btn-weapon">PAPER</button>
+                    <button id="btn-scissors" class="btn-weapon">SCISSORS</button>
+                </div>
+                <!-- Score -->
+                <div id="score" class="flex w-full">
+                    <p id="player-score"></p>
+                    <p id="computer-score"></p>
+                    <p id="tie-score"></p>
+                </div>
+                <p id="victor"></p>
                 <ul id="results-list"></ul>
+                <button id="btn-return" class="btn-weapon translucent remove">RETURN</button>
             </div>
         </section>
     </main>

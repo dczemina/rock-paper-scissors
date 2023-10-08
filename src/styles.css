@@ -3,6 +3,21 @@
     font-family: 'Shantell Sans', cursive;
 }
 
+ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+/* Score and Results */
+#victor {
+    font-size: 1.5rem
+}
+
+#score {
+    font-size: 1.25rem;
+}
+
 /* UI Visibility */
 .remove {
     display: none;
@@ -35,19 +50,19 @@ button {
     background-color: rgb(90,90,90);
     color: rgb(200,200,200);
     border-radius: 0.5rem;
-    cursor: pointer;
-    
 }
 
-.btn-weapon:hover {
+.btn-weapon:not(:disabled):hover {
     transition: all 0.25s ease-in-out;
     background-color: rgb(60,60,60);
+    cursor: pointer;
 }
 
-.btn-weapon:hover:active {
+.btn-weapon:not(:disabled):hover:active {
     background-color: rgb(30,30,30);
 }
 
+/* Animations */
 .shake {
     transition: transform 0.3s ease;
     animation: shake 0.5s ease;
@@ -76,8 +91,16 @@ button {
     gap: 5px;
 }
 
+.flex.flex-column {
+    flex-direction: column;
+}
+
 @media screen and (max-width: 480px) {
     .flex {
         flex-direction: column;
     }
+}
+
+.text-center {
+    text-align: center;
 }
